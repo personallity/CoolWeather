@@ -5,9 +5,9 @@
     <version value = "1"/>
 
     <list>
-        <mapping class = "com.CoolWeather.android.db.Province"/>
-        <mapping class = "com.CoolWeather.android.db.City"/>
-        <mapping class = "com.CoolWeather.android.db.Country"/>
+        <mapping class = "com.example.xiyou.coolweather.db.Province"/>
+        <mapping class = "com.example.xiyou.coolweather.db.City"/>
+        <mapping class = "com.example.xiyou.coolweather.db.County"/>
     </list>
 
 </litepal>
