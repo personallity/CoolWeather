@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.xiyou.coolweather.db.City;
 import com.example.xiyou.coolweather.db.County;
 import com.example.xiyou.coolweather.db.Province;
+import com.example.xiyou.coolweather.gson.Weather;
 import com.example.xiyou.coolweather.util.HttpUtil;
 import com.example.xiyou.coolweather.util.Utility;
 
@@ -95,10 +96,17 @@ public class ChooseAreaFragment extends Fragment {
                     queryCounties();
                 } else if (currentLevel == LEVEL_COUNTY) {
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (getActivity() instanceof  MainActivity) {
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else if (getActivity() instanceof WeatherActivity) {
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.drawerLayout.closeDrawers();
+                        activity.swipeRefresh.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
                 }
             }
         });
@@ -112,7 +120,6 @@ public class ChooseAreaFragment extends Fragment {
                     }
             }
         });
-        Log.e(TAG, "onActivityCreated0000000000000000: " );
         queryProvinces();
     }
 
